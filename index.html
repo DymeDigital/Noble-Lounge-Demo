@@ -309,7 +309,10 @@
 
         /* ================= FEATURES ================= */
         .features {
-            background-color: var(--bg-dark);
+            background: linear-gradient(rgba(15, 15, 15, 0.9), rgba(15, 15, 15, 0.9)), url('images/experience_desktop.jpg');
+            background-size: cover;
+            background-position: center;
+            background-attachment: fixed;
         }
 
         .features-grid {
@@ -322,14 +325,25 @@
 
         .feature-card {
             text-align: center;
-            padding: 2rem;
+            padding: 2.5rem 2rem;
+            background: rgba(255, 255, 255, 0.03);
             border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 8px;
             transition: all 0.4s ease;
         }
 
         .feature-card:hover {
             border-color: var(--primary-gold);
             transform: translateY(-10px);
+            box-shadow: 0 10px 30px rgba(212, 165, 116, 0.1);
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .feature-icon {
+            font-size: 2.5rem;
+            color: var(--primary-gold);
+            margin-bottom: 1.5rem;
+            display: inline-block;
         }
 
         .feature-card h3 {
@@ -344,6 +358,7 @@
             color: var(--text-muted);
             font-size: 0.95rem;
             font-weight: 300;
+            line-height: 1.8;
         }
 
         /* ================= GALLERY ================= */
@@ -790,18 +805,21 @@
         <h2 class="section-title">The Experience</h2>
         <div class="features-grid">
             <div class="feature-card">
+                <i class="fas fa-martini-glass-citrus feature-icon"></i>
                 <h3>Artisanal Cocktails</h3>
                 <p>A fusion of premium spirits and exotic flavors, crafted by our expert mixologists to tantalize your
                     palate.</p>
             </div>
             <div class="feature-card">
+                <i class="fas fa-utensils feature-icon"></i>
                 <h3>Gourmet Dining</h3>
-                <p>Small plates and signature dishes prepared with fresh, locally sourced ingredients for a modern
+                <p>Gourmet plates and signature dishes prepared with fresh, locally sourced ingredients for a modern
                     culinary journey.</p>
             </div>
             <div class="feature-card">
+                <i class="fas fa-music feature-icon"></i>
                 <h3>Curated Sounds</h3>
-                <p>From deep house to soulful jazz, our resident DJs and live artists set the perfect rhythm for your
+                <p>From deep house to R&B, our resident DJs and live artists set the perfect rhythm for your
                     evening.</p>
             </div>
         </div>
@@ -841,7 +859,7 @@
         <div class="contact-details">
             <p><strong>Open:</strong> Thursday – Saturday</p>
             <p><strong>Hours:</strong> 6:00 PM – 2:00 AM</p>
-            <p><strong>Location:</strong> Durban, Queensburgh</p>
+            <p><strong>Location:</strong> Durban, KwaZulu-Natal</p>
         </div>
         <br>
         <div class="contact-buttons">
@@ -983,6 +1001,5 @@
         });
     </script>
 </body>
-
 
 </html>
