@@ -1,0 +1,987 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Noble Lounge - Where Elegance Meets Experience</title>
+    <!-- Import Premium Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Montserrat:wght@300;400;500&display=swap"
+        rel="stylesheet">
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        :root {
+            --primary-gold: #d4a574;
+            --secondary-gold: #C5A065;
+            --bg-dark: #0f0f0f;
+            --bg-card: rgba(30, 30, 30, 0.6);
+            --text-light: #f5f5f5;
+            --text-muted: #a0a0a0;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Montserrat', sans-serif;
+            background-color: var(--bg-dark);
+            color: var(--text-light);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+
+        /* ================= HEADER ================= */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 5%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background: linear-gradient(to bottom, rgba(15, 15, 15, 0.9), rgba(15, 15, 15, 0));
+            z-index: 1000;
+            transition: all 0.4s ease;
+        }
+
+        header.scrolled {
+            background: rgba(15, 15, 15, 0.95);
+            padding: 1rem 5%;
+            backdrop-filter: blur(10px);
+            border-bottom: 1px solid rgba(212, 165, 116, 0.1);
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 2rem;
+            letter-spacing: 0.15em;
+            color: var(--primary-gold);
+            text-transform: uppercase;
+            font-weight: 600;
+            text-decoration: none;
+            /* Ensure no underline for link */
+        }
+
+        .hamburger {
+            display: none;
+            /* Hidden on desktop */
+        }
+
+        .nav-links {
+            display: flex;
+        }
+
+        .nav-links a {
+            margin-left: 2.5rem;
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--primary-gold);
+            transition: width 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--primary-gold);
+        }
+
+        nav a:hover::after {
+            width: 100%;
+        }
+
+        /* ================= HERO ================= */
+        .hero {
+            height: 100vh;
+            width: 100%;
+            position: relative;
+            display: flex;
+            align-items: center;
+            /* Gradient overlay to ensure text readability over the image */
+            background:
+                linear-gradient(90deg, rgba(0, 0, 0, 0.85) 0%, rgba(0, 0, 0, 0.5) 50%, rgba(0, 0, 0, 0.1) 100%),
+                url('images/backdesk.png') center/cover no-repeat;
+        }
+
+        .hero-content {
+            padding-left: 10%;
+            max-width: 800px;
+            position: relative;
+            z-index: 2;
+        }
+
+        .hero-label {
+            display: block;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.9rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--primary-gold);
+            margin-bottom: 1.5rem;
+            opacity: 0;
+            animation: fadeInRight 1s ease forwards 0.5s;
+        }
+
+        .hero h1 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: clamp(3.5rem, 5vw, 5.5rem);
+            font-weight: 300;
+            line-height: 1.1;
+            margin-bottom: 2rem;
+            color: #fff;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 0.8s;
+        }
+
+        .hero h1 span {
+            color: var(--primary-gold);
+            font-style: italic;
+        }
+
+        .hero-cta {
+            display: inline-flex;
+            align-items: center;
+            padding: 1rem 2.5rem;
+            background: transparent;
+            border: 1px solid var(--primary-gold);
+            color: var(--primary-gold);
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.2em;
+            font-size: 0.8rem;
+            transition: all 0.4s ease;
+            opacity: 0;
+            animation: fadeInUp 1s ease forwards 1.1s;
+        }
+
+        .hero-cta:hover {
+            background: var(--primary-gold);
+            color: #000;
+            transform: translateX(10px);
+        }
+
+        /* Scroll Indicator */
+        .scroll-indicator {
+            position: absolute;
+            bottom: 40px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            opacity: 0.6;
+            animation: bounce 2s infinite;
+        }
+
+        .scroll-text {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .scroll-line {
+            width: 1px;
+            height: 40px;
+            background: var(--text-light);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInRight {
+            from {
+                opacity: 0;
+                transform: translateX(-30px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        @keyframes bounce {
+
+            0%,
+            20%,
+            50%,
+            80%,
+            100% {
+                transform: translateX(-50%) translateY(0);
+            }
+
+            40% {
+                transform: translateX(-50%) translateY(-10px);
+            }
+
+            60% {
+                transform: translateX(-50%) translateY(-5px);
+            }
+        }
+
+        /* ================= SECTIONS COMMON ================= */
+        section {
+            padding: 8rem 5%;
+        }
+
+        .section-title {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 3rem;
+            text-align: center;
+            margin-bottom: 4rem;
+            color: var(--primary-gold);
+            font-weight: 300;
+            letter-spacing: 0.05em;
+        }
+
+        /* ================= ABOUT ================= */
+        .about {
+            background-color: #151515;
+        }
+
+        .about-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+
+        .about-text p {
+            margin-bottom: 2rem;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+            font-weight: 300;
+        }
+
+        .about-image {
+            position: relative;
+            height: 500px;
+            overflow: hidden;
+            border-radius: 4px;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.7s ease;
+        }
+
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+
+        /* ================= FEATURES ================= */
+        .features {
+            background-color: var(--bg-dark);
+        }
+
+        .features-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 4rem;
+        }
+
+        .feature-card {
+            text-align: center;
+            padding: 2rem;
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            transition: all 0.4s ease;
+        }
+
+        .feature-card:hover {
+            border-color: var(--primary-gold);
+            transform: translateY(-10px);
+        }
+
+        .feature-card h3 {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        .feature-card p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+            font-weight: 300;
+        }
+
+        /* ================= GALLERY ================= */
+        .gallery {
+            background-color: #151515;
+            padding-bottom: 0;
+        }
+
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+        }
+
+        .gallery-item {
+            position: relative;
+            aspect-ratio: 1;
+            overflow: hidden;
+        }
+
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+            display: block;
+        }
+
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+
+        .gallery-overlay {
+            position: absolute;
+            inset: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            transition: all 0.4s ease;
+            pointer-events: none;
+            /* Allow clicks to pass through to the image/container */
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+            pointer-events: auto;
+            /* Enable pointer events on hover/interaction */
+        }
+
+        .gallery-item {
+            cursor: pointer;
+        }
+
+        .gallery-item:hover .gallery-overlay {
+            opacity: 1;
+        }
+
+        .gallery-overlay span {
+            color: var(--primary-gold);
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            border: 1px solid var(--primary-gold);
+            padding: 0.8rem 1.5rem;
+        }
+
+        /* ================= CONTACT ================= */
+        .contact {
+            background-color: var(--bg-dark);
+            text-align: center;
+            padding: 8rem 5%;
+        }
+
+        .contact-details {
+            display: inline-block;
+            border-left: 1px solid var(--primary-gold);
+            padding-left: 2rem;
+            text-align: left;
+        }
+
+        .contact p {
+            margin-bottom: 0.5rem;
+            color: var(--text-muted);
+            font-size: 1.1rem;
+        }
+
+        .contact-cta {
+            margin-top: 3rem;
+            display: inline-block;
+            background: var(--primary-gold);
+            color: #000;
+            padding: 1rem 3rem;
+            text-decoration: none;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .contact-cta:hover {
+            background: #000;
+            color: var(--primary-gold);
+            border-color: var(--primary-gold);
+        }
+
+        .contact-buttons {
+            margin-top: 2rem;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            align-items: center;
+        }
+
+        .whatsapp-btn {
+            background: transparent;
+            border: 1px solid var(--primary-gold);
+            color: var(--primary-gold);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .whatsapp-btn:hover {
+            background: var(--primary-gold);
+            color: #000;
+        }
+
+        /* ================= FOOTER & SOCIAL ================= */
+        footer {
+            padding: 4rem 5% 2rem;
+            text-align: center;
+            background: #0d0d0d;
+            border-top: 1px solid rgba(255, 255, 255, 0.05);
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-icon {
+            color: var(--text-muted);
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+        }
+
+        .social-icon:hover {
+            color: var(--primary-gold);
+            border-color: var(--primary-gold);
+            transform: translateY(-5px);
+        }
+
+        footer p {
+            color: #555;
+            font-size: 0.8rem;
+            letter-spacing: 0.1em;
+        }
+
+        /* ================= LIGHTBOX ================= */
+
+        /* ================= LIGHTBOX ================= */
+        .lightbox {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 2000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.3s ease;
+        }
+
+        .lightbox.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+            border: 2px solid var(--primary-gold);
+        }
+
+        .lightbox-close {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: var(--primary-gold);
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 2001;
+        }
+
+        .lightbox-nav {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            color: var(--primary-gold);
+            font-size: 2rem;
+            cursor: pointer;
+            z-index: 2001;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.3);
+            border-radius: 4px;
+            transition: all 0.3s ease;
+        }
+
+        .lightbox-nav:hover {
+            background: rgba(0, 0, 0, 0.8);
+            transform: translateY(-50%) scale(1.1);
+        }
+
+        .lightbox-prev {
+            left: 20px;
+        }
+
+        .lightbox-next {
+            right: 20px;
+        }
+
+        /* ================= RESPONSIVE ================= */
+        @media (max-width: 768px) {
+            header {
+                padding: 1rem 5%;
+            }
+
+            /* Hide logo initially on mobile to avoid duplication with bg image */
+            .logo {
+                opacity: 0;
+                transform: translateY(-10px);
+                transition: all 0.3s ease;
+                pointer-events: none;
+            }
+
+            header.scrolled .logo {
+                opacity: 1;
+                transform: translateY(0);
+                pointer-events: auto;
+            }
+
+            /* Hamburger CSS */
+            .hamburger {
+                display: block;
+                cursor: pointer;
+                z-index: 1001;
+                /* Above mobile menu */
+            }
+
+            .hamburger span {
+                display: block;
+                width: 25px;
+                height: 2px;
+                background-color: var(--primary-gold);
+                margin: 5px 0;
+                transition: all 0.3s ease;
+            }
+
+            /* Hamburger Animation when active */
+            .hamburger.active span:nth-child(1) {
+                transform: rotate(45deg) translate(5px, 5px);
+            }
+
+            .hamburger.active span:nth-child(2) {
+                opacity: 0;
+            }
+
+            .hamburger.active span:nth-child(3) {
+                transform: rotate(-45deg) translate(5px, -5px);
+            }
+
+            /* Mobile Menu */
+            .nav-links {
+                position: fixed;
+                top: 0;
+                right: -100%;
+                /* Hidden by default */
+                height: 100vh;
+                width: 70%;
+                background: rgba(15, 15, 15, 0.98);
+                backdrop-filter: blur(10px);
+                flex-direction: column;
+                justify-content: center;
+                align-items: center;
+                transition: right 0.4s ease;
+                display: flex;
+                border-left: 1px solid rgba(212, 165, 116, 0.2);
+            }
+
+            .nav-links.active {
+                right: 0;
+                box-shadow: -10px 0 30px rgba(0, 0, 0, 0.5);
+            }
+
+            .nav-links a {
+                margin: 1.5rem 0;
+                font-size: 1.2rem;
+            }
+
+            .hero {
+                background:
+                    linear-gradient(180deg, rgba(0, 0, 0, 0.7) 0%, rgba(0, 0, 0, 0.4) 40%, rgba(0, 0, 0, 0.8) 100%),
+                    url('images/backmobile.jpg') center/cover no-repeat;
+                align-items: center;
+                /* Center vertically */
+                padding-bottom: 0;
+                justify-content: center;
+            }
+
+            .hero-content {
+                padding: 0 5%;
+                width: 100%;
+                text-align: center;
+                margin-top: 20vh;
+                margin-bottom: 25vh;
+                /* Slightly lower than before */
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+                /* Slightly smaller to fit better */
+                margin-bottom: 1.5rem;
+            }
+
+            .hero-label {
+                font-size: 0.8rem;
+                margin-bottom: 1rem;
+            }
+
+            .hero-cta {
+                padding: 0.8rem 2rem;
+                font-size: 0.75rem;
+                background: rgba(0, 0, 0, 0.4);
+                /* Lighter background */
+                backdrop-filter: blur(5px);
+                border: 1px solid var(--primary-gold);
+                margin-top: 8vh;
+                transform: translateY(-60%);
+                /* Positioning button below the background thumb */
+            }
+
+            .about-content,
+            .features-grid {
+                grid-template-columns: 1fr;
+                /* Stack everything in 1 column */
+                gap: 1.5rem;
+            }
+
+            .gallery-grid {
+                display: flex;
+                overflow-x: auto;
+                scroll-snap-type: x mandatory;
+                gap: 1rem;
+                padding-bottom: 1rem;
+                -webkit-overflow-scrolling: touch;
+            }
+
+            .gallery-grid::-webkit-scrollbar {
+                display: none;
+            }
+
+            .gallery-item {
+                width: 75vw;
+                height: 50vh;
+                /* Standard vertical frame size */
+                scroll-snap-align: center;
+                flex-shrink: 0;
+                margin-bottom: 0;
+                aspect-ratio: unset;
+                /* Override desktop square aspect ratio */
+                border: 1px solid rgba(212, 165, 116, 0.3);
+            }
+
+            /* Removed the 2-column override for gallery-grid */
+        }
+    </style>
+</head>
+
+<body>
+
+    <header>
+        <a href="#home" class="logo">noble</a>
+        <div class="hamburger">
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
+        <nav class="nav-links">
+            <!-- Hidden on mobile in this simple version, could add hamburger later -->
+            <a href="#about">About</a>
+            <a href="#experience">Experience</a>
+            <a href="#gallery">Gallery</a>
+            <a href="#contact">Contact</a>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <span class="hero-label">Where the Night Unfolds</span>
+            <h1>The Art of <br><span>Refined Leisure</span></h1>
+            <a href="#contact" class="hero-cta">Reserve Your Table</a>
+        </div>
+
+        <div class="scroll-indicator">
+            <span class="scroll-text">Scroll</span>
+            <div class="scroll-line"></div>
+        </div>
+    </section>
+
+    <section id="about" class="about">
+        <div class="about-content">
+            <div class="about-text">
+                <h2 class="section-title" style="text-align: left; margin-bottom: 2rem;">Redefining Elegance</h2>
+                <p>Noble Lounge is not just a destination; it is an experience. Located in the heart of Durban, we
+                    curate an atmosphere where sophistication meets vibrant energy.</p>
+                <p>From our handcrafted cocktails to our meticulously designed interior, every detail invites you to
+                    unwind, indulge, and celebrate in style.</p>
+                <div style="margin-top: 2rem; height: 1px; width: 100px; background: var(--primary-gold);"></div>
+            </div>
+            <div class="about-image">
+                <img src="images/img2.jpg" alt="Interior of Noble Lounge"
+                    onerror="this.style.display='none'; this.parentElement.style.background='#222'">
+            </div>
+        </div>
+    </section>
+
+    <section id="experience" class="features">
+        <h2 class="section-title">The Experience</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Artisanal Cocktails</h3>
+                <p>A fusion of premium spirits and exotic flavors, crafted by our expert mixologists to tantalize your
+                    palate.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Gourmet Dining</h3>
+                <p>Small plates and signature dishes prepared with fresh, locally sourced ingredients for a modern
+                    culinary journey.</p>
+            </div>
+            <div class="feature-card">
+                <h3>Curated Sounds</h3>
+                <p>From deep house to soulful jazz, our resident DJs and live artists set the perfect rhythm for your
+                    evening.</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery">
+        <div class="gallery-grid">
+            <div class="gallery-item">
+                <img src="images/img1.jpg" alt="Gallery Image">
+                <div class="gallery-overlay"><span>VIEW</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/img2.jpg" alt="Gallery Image">
+                <div class="gallery-overlay"><span>VIEW</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/img3.webp" alt="Gallery Image">
+                <div class="gallery-overlay"><span>VIEW</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/img4.webp" alt="Gallery Image">
+                <div class="gallery-overlay"><span>VIEW</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/bottle.jpg" alt="Gallery Image">
+                <div class="gallery-overlay"><span>VIEW</span></div>
+            </div>
+            <div class="gallery-item">
+                <img src="images/img1.jpg" alt="Gallery Image">
+                <div class="gallery-overlay"><span>VIEW</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <h2 class="section-title">Join Us</h2>
+        <div class="contact-details">
+            <p><strong>Open:</strong> Thursday – Saturday</p>
+            <p><strong>Hours:</strong> 6:00 PM – 2:00 AM</p>
+            <p><strong>Location:</strong> Durban, KwaZulu-Natal</p>
+        </div>
+        <br>
+        <div class="contact-buttons">
+            <a href="#" class="contact-cta">Make a Reservation</a>
+            <a href="https://wa.me/27848110928" target="_blank" class="contact-cta whatsapp-btn">
+                <i class="fab fa-whatsapp" style="margin-right: 8px;"></i> WhatsApp
+            </a>
+        </div>
+    </section>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://www.instagram.com/noble_lounge_malvern/" target="_blank" class="social-icon"
+                aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+            </a>
+            <a href="https://wa.me/27848110928" target="_blank" class="social-icon" aria-label="WhatsApp">
+                <i class="fab fa-whatsapp"></i>
+            </a>
+        </div>
+        <p>&copy; 2025 Noble Lounge. All rights reserved.</p>
+    </footer>
+
+    <!-- Lightbox Modal -->
+    <div id="lightbox" class="lightbox">
+        <span class="lightbox-close">&times;</span>
+        <i class="fas fa-chevron-left lightbox-nav lightbox-prev"></i>
+        <i class="fas fa-chevron-right lightbox-nav lightbox-next"></i>
+        <img id="lightbox-img" src="" alt="Lightbox Image">
+    </div>
+
+    <script>
+        // Header Scroll Effect
+        window.addEventListener('scroll', () => {
+            const header = document.querySelector('header');
+            if (window.scrollY > 50) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        });
+
+        // Hamburger Menu Logic
+        const hamburger = document.querySelector('.hamburger');
+        const navLinks = document.querySelector('.nav-links');
+        const links = document.querySelectorAll('.nav-links a');
+
+        hamburger.addEventListener('click', () => {
+            navLinks.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        });
+
+        // Close menu when clicking a link
+        links.forEach(link => {
+            link.addEventListener('click', () => {
+                navLinks.classList.remove('active');
+                hamburger.classList.remove('active');
+            });
+        });
+
+        // Smooth Scroll for Anchors
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Lightbox Logic
+        const lightbox = document.getElementById('lightbox');
+        const lightboxImg = document.getElementById('lightbox-img');
+        const closeBtn = document.querySelector('.lightbox-close');
+        const prevBtn = document.querySelector('.lightbox-prev');
+        const nextBtn = document.querySelector('.lightbox-next');
+
+        let galleryImages = []; // Array to store all image sources
+        let currentIndex = 0;
+
+        // Collect all images in order
+        const items = document.querySelectorAll('.gallery-item');
+        items.forEach((item, index) => {
+            const img = item.querySelector('img');
+            if (img) {
+                galleryImages.push(img.src);
+
+                // Add click listener with index reference
+                item.addEventListener('click', () => {
+                    currentIndex = index;
+                    updateLightboxImage();
+                    lightbox.classList.add('active');
+                });
+            }
+        });
+
+        function updateLightboxImage() {
+            lightboxImg.src = galleryImages[currentIndex];
+        }
+
+        function showNext() {
+            currentIndex = (currentIndex + 1) % galleryImages.length;
+            updateLightboxImage();
+        }
+
+        function showPrev() {
+            currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
+            updateLightboxImage();
+        }
+
+        // Event Listeners
+        nextBtn.addEventListener('click', (e) => {
+            e.stopPropagation(); // Prevent closing lightbox
+            showNext();
+        });
+
+        prevBtn.addEventListener('click', (e) => {
+            e.stopPropagation();
+            showPrev();
+        });
+
+        const closeLightbox = () => {
+            lightbox.classList.remove('active');
+        }
+
+        closeBtn.addEventListener('click', closeLightbox);
+
+        lightbox.addEventListener('click', (e) => {
+            if (e.target === lightbox) closeLightbox();
+        });
+
+        // Keyboard Navigation
+        document.addEventListener('keydown', (e) => {
+            if (!lightbox.classList.contains('active')) return;
+
+            if (e.key === 'ArrowRight') showNext();
+            if (e.key === 'ArrowLeft') showPrev();
+            if (e.key === 'Escape') closeLightbox();
+        });
+    </script>
+</body>
+
+</html>
